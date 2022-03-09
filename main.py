@@ -20,32 +20,30 @@ The format of docstrings is NumPy/SciPy, following PEP 257.
 The API used is 'PokeAPI' (https://pokeapi.co/). Just accept HTTP GET
 requests and not need authentication.
 """
-from typing import Dict
-
-from api_functions import get_option_user
-from auxiliar_functions import clear_screen
-
-def menu() -> None:
-    """Show a menu with the options to resolve each one of the questions:
-    
-    1. Number of pokemons with 'at' and double 'a' its name.
-    2. How many pokemon species are able to procreate with Raichu?
-    3. Maximum and minimum weight of first season fighting type pokemon
-       (id: 1-151).
-    """
-    options: Dict[int, str] = {
-        1: "Número de pokemons con 'at' y doble 'a' en su nombre.",
-        2: 'La cantidad de especies de pokémon son capaces de procrear con Raichu.',
-        3: 'Peso máximo y mínimo de los pokémon de tipo lucha de la primera temporada.',
-        4: 'Salir.'
-    }
-
-    clear_screen()
-    print('\t\t-Datos curiosos sobre los pokémon-')
-    for number, option in options.items():
-        print(f'{number}. {option}')
-    option_selected: int = get_option_user()
-    # print(option_selected)
-
-if __name__ == '__main__':
+from pprint import pprint
+from functions import menu, get_option_user
+from pokemon import Pokemon
+from request import PokeApi
+def main() -> None:
+    """Call menu and resolve the question."""
     menu()
+    option_selected: int = get_option_user()
+    print(option_selected)
+    
+    # review status_code
+    # print(PokeApi(limit=1126).get_all_pokemon())
+    
+    # try:
+    #     raichu: Pokemon = PokeApi().get_pokemon(id=26)
+    # except AttributeError as atrribute_error:
+    #     print(f'Lo sentimos ha ocurrido un error: {atrribute_error}')
+    # else:
+    #     egg_groups_species = PokeApi().get_egg_group_species(raichu)
+    #     pprint(egg_groups_species)
+    #     for value in egg_groups_species.values():
+    #         print(len(value))
+    # # validate thta egg_groups_species is not empty and eceptions JsonDecoder
+    
+    
+if __name__ == '__main__':
+    main()
