@@ -4,7 +4,7 @@ Display a menu to call the function that resolve the questions.
 
 Notes
 -----
-It was programmed in python 3.9.
+It was programmed in python 3.10.2 (The last version).
 Author: Jonathan Garcia.
 
 To simplify the program, this was used modular programming, although
@@ -20,30 +20,41 @@ The format of docstrings is NumPy/SciPy, following PEP 257.
 The API used is 'PokeAPI' (https://pokeapi.co/). Just accept HTTP GET
 requests and not need authentication.
 """
-from pprint import pprint
-from functions import menu, get_option_user
-from pokemon import Pokemon
-from request import PokeApi
+from typing import NoReturn, Callable
+
+from functions import (menu, get_option_user, print_option, notes, pokemon_match_patterns,
+                        pokemon_egg_group_species, max_min_weigth_pokemon_by_type_generation, exit)
+
 def main() -> None:
     """Call menu and resolve the question."""
-    menu()
-    option_selected: int = get_option_user()
-    print(option_selected)
-    
-    # review status_code
-    # print(PokeApi(limit=1126).get_all_pokemon())
-    
-    # try:
-    #     raichu: Pokemon = PokeApi().get_pokemon(id=26)
-    # except AttributeError as atrribute_error:
-    #     print(f'Lo sentimos ha ocurrido un error: {atrribute_error}')
-    # else:
-    #     egg_groups_species = PokeApi().get_egg_group_species(raichu)
-    #     pprint(egg_groups_species)
-    #     for value in egg_groups_species.values():
-    #         print(len(value))
-    # # validate thta egg_groups_species is not empty and eceptions JsonDecoder
-    
-    
+    resolve: dict[int, Callable[[], int|list[float]|NoReturn]] = {
+        1: pokemon_match_patterns,
+        2: pokemon_egg_group_species,
+        3: max_min_weigth_pokemon_by_type_generation,
+        4: exit
+    }
+
+    while True:
+        menu()
+        result: int|list[float] = 0
+        option_selected: int = get_option_user()
+        if option_selected == 2:
+            pokemon, result = resolve[option_selected]()  # type: ignore
+            notes(option_selected, pokemon=pokemon)  # type: ignore
+            print_option(option_selected, pokemon_name=pokemon.name) # type: ignore
+        else:
+            result = resolve[option_selected]()
+            notes(option_selected)
+            print_option(option_selected)
+        print(result)
+        
+        to_continue: str = input(
+            "\n¿Desea resolver alguna otra pokéduda? Sí (presione 's') o cualquier otra tecla para salir: "
+            ).lower().strip()
+        if to_continue == 's':
+            continue
+        else:
+            exit()
+
 if __name__ == '__main__':
     main()

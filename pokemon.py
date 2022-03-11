@@ -1,5 +1,5 @@
-"""Class reference for Pokemon."""
-from typing import Optional
+"""Class reference for a pokemon."""
+
 
 class Pokemon():
     """Model the basic features of a pokemon and some related with the
@@ -19,8 +19,8 @@ class Pokemon():
         Height in m.
     """
 
-    def __init__(self, id: int, name: str, weight: Optional[float] = None, 
-                height: Optional[float] = None, egg_groups: Optional[dict[str, str]] = None) -> None:
+    def __init__(self, id: int, name: str, egg_groups: list[dict[str, str]],
+                weight: float = 0.0, height: float = 0.0, ) -> None:
         """Initialize the aspects of the pokemon.
         
         Parameters
@@ -36,9 +36,9 @@ class Pokemon():
         """
         self.id: int = id
         self.name: str = name
-        self.height: Optional[float] = height
-        self.weight: Optional[float] = weight
-        self.egg_groups: Optional[dict[str, str]] = egg_groups
+        self.height: float = height
+        self.weight: float = weight
+        self.egg_groups: list[dict[str, str]] = egg_groups
 
     def __str__(self) -> str:
         """Return the ID name of the pokemon."""
