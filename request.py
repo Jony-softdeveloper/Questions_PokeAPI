@@ -1,5 +1,6 @@
 """Classes which permit make the request to Pokemon API enpoints."""
 from typing import Any
+
 import requests
 from requests.exceptions import JSONDecodeError
 
