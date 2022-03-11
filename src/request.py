@@ -4,7 +4,7 @@ from typing import Any
 import requests
 from requests.exceptions import JSONDecodeError
 
-from src.pokemon import Pokemon
+from pokemon import Pokemon
 
 class RequestApi():
     """Model the general data and functionality to make a request.

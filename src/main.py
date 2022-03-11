@@ -22,7 +22,7 @@ requests and not need authentication.
 """
 from typing import NoReturn, Callable
 
-from src.functions import (menu, get_option_user, print_option, notes, pokemon_match_patterns,
+from functions import (menu, get_option_user, print_option, notes, pokemon_match_patterns,
                         pokemon_egg_group_species, max_min_weigth_pokemon_by_type_generation, exit)
 
 def main() -> None:

@@ -5,8 +5,8 @@ from typing import NoReturn, Any
 from pandas import DataFrame
 from requests.exceptions import JSONDecodeError # type: ignore
 
-from src.pokemon import Pokemon
-from src.request import PokeApi
+from pokemon import Pokemon
+from request import PokeApi
 
 
 def spanish_options(pokemon_name: str = 'raichu', type: str ='lucha', generation: int = 1) -> dict[int, str]:
@@ -29,9 +29,9 @@ def spanish_options(pokemon_name: str = 'raichu', type: str ='lucha', generation
         The dictinary with the questions in spanis.h
     """
     options: dict[int, str] = {
-        1: "El número de pokemons con 'at' y doble 'a' en su nombre.",
-        2: f'La cantidad de especies de pokémon son capaces de procrear con {pokemon_name.capitalize()}.',
-        3: f'El peso máximo y mínimo de los pokémon de tipo {type} de la generación {generation}.',
+        1: "El número de pokémons con 'at' y doble 'a' en su nombre.",
+        2: f'La cantidad de especies de pokémons que son capaces de procrear con {pokemon_name.capitalize()}.',
+        3: f'El peso máximo y mínimo de los pokémons de tipo {type} de la generación {generation}.',
         4: 'Salir.'
     }
     return options
@@ -214,7 +214,7 @@ def pokemon_egg_group_species(id: int = 26) -> tuple[Pokemon, int]:
 def max_min_weigth_pokemon_by_type_generation(type: str = 'fighting', generation: int = 1) -> list[float]:
     """Look for the highest and lowest weight within the pokémon
     
-    according to a type of pokémon and a generation.
+    according to a type of pokemon and a generation.
 
     Parameters
     ----------
